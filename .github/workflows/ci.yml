@@ -35,4 +35,4 @@ jobs:
         run: >
           denoflare push mobius
           --account-id ${{ secrets.ACCOUNT_ID }}
-          --api_token ${{ secrets.API_TOKEN }}
+          --api-token ${{ secrets.API_TOKEN }}
