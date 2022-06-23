@@ -3,7 +3,7 @@ import { readLines } from "io/mod.ts";
 
 Deno.test("hello world", async () => {
   const process = Deno.run({
-    cmd: ["denoflare", "serve", "./examples/05_denoflare.ts"],
+    cmd: ["denoflare", "serve", "mobius"],
     stderr: "null",
     stdout: "piped",
   });
@@ -15,13 +15,27 @@ Deno.test("hello world", async () => {
       const host = matched[0];
       assert(host);
 
-      const checkResponse = async (path: string, text: string) => {
+      const checkStatus = async (path: string, status: number) => {
         const response = await fetch(host + path);
-        assertEquals(await response.text(), text);
+        await response.text();
+        assertEquals(response.status, status);
+      }
+
+      const checkMessage = async (path: string, text: string | undefined) => {
+        const response = await fetch(host + path);
+        const json = await response.json();
+        assertEquals(json.message, text);
       };
 
-      await checkResponse("/", "Hello World!");
-      await checkResponse("/not_exist", "Not Found");
+      await checkStatus("/", 200);
+      await checkMessage("/", "Mobius API");
+
+      await checkStatus("/not_exist", 404);
+      await checkMessage("/not_exist", undefined);
+
+      const createURL = "/create/" + encodeURIComponent("https://github.com");
+      await checkStatus(createURL, 200);
+      await checkMessage(createURL, "created");
 
       break;
     }
