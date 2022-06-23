@@ -1,7 +1,7 @@
 name: deploy
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
 
 jobs:
   deploy:
@@ -22,4 +22,7 @@ jobs:
           https://raw.githubusercontent.com/skymethod/denoflare/v0.5.2/cli/cli.ts
 
       - name: Deploy
-        run: denoflare push mobius --account-id ${{ secrets.ACCOUNT_ID }} --api_token ${{ secrets.API_TOKEN }}
+        run: >
+          denoflare push mobius
+          --account-id ${{ secrets.ACCOUNT_ID }}
+          --api_token ${{ secrets.API_TOKEN }}
