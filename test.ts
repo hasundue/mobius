@@ -4,7 +4,7 @@ import {
   assertEquals,
 } from "https://deno.land/std@0.144.0/testing/asserts.ts";
 
-Deno.test("hello world", async () => {
+Deno.test("test", async () => {
   const process = Deno.run({
     cmd: ["denoflare", "serve", "mobius"],
     stderr: "null",
@@ -18,27 +18,28 @@ Deno.test("hello world", async () => {
       const host = matched[0];
       assert(host);
 
-      const checkStatus = async (path: string, status: number) => {
-        const response = await fetch(host + path);
+      const checkStatus = async (path: string, method: string, status: number) => {
+        const response = await fetch(host + path, { method });
         await response.text();
         assertEquals(response.status, status);
       };
 
-      const checkMessage = async (path: string, text: string | undefined) => {
-        const response = await fetch(host + path);
+      const checkMessage = async (path: string, method = "GET", text: string | undefined) => {
+        const response = await fetch(host + path, { method });
         const json = await response.json();
         assertEquals(json.message, text);
       };
 
-      await checkStatus("/", 200);
-      await checkMessage("/", "Mobius API");
+      await checkStatus("/", "GET", 200);
+      await checkMessage("/", "GET", "Mobius API");
 
-      await checkStatus("/not_exist", 404);
-      await checkMessage("/not_exist", undefined);
+      await checkStatus("/create", "POST", 201);
+      await checkMessage("/create", "POST", "created");
 
-      const createURL = "/create/" + encodeURIComponent("https://github.com");
-      await checkStatus(createURL, 200);
-      await checkMessage(createURL, "created");
+      const id = crypto.randomUUID();
+
+      await checkStatus(`/${id}`, "GET", 200);
+      await checkMessage(`/${id}`, "GET", id);
 
       break;
     }
