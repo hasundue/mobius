@@ -17,4 +17,4 @@ const notFound = () => json({}, { status: 404 });
 
 const create = (url: string) => {
   return json({ message: "created", url });
-}
+};

@@ -19,7 +19,7 @@ Deno.test("hello world", async () => {
         const response = await fetch(host + path);
         await response.text();
         assertEquals(response.status, status);
-      }
+      };
 
       const checkMessage = async (path: string, text: string | undefined) => {
         const response = await fetch(host + path);
