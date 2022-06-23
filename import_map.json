@@ -1,5 +1,7 @@
 {
   "imports": {
-    "sift": "https://pax.deno.dev/hasundue/sift@flare/mod.ts"
+    "io/": "https://deno.land/std@0.144.0/io/",
+    "sift": "https://pax.deno.dev/hasundue/sift@flare/mod.ts",
+    "testing/": "https://deno.land/std@0.144.0/testing/"
   }
 }

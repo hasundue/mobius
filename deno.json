@@ -1,3 +1,6 @@
 {
-  importMap: "import_map.json"
+  "tasks": {
+    "test": "deno test --unstable --allow-all"
+  },
+  "importMap": "import_map.json"
 }
