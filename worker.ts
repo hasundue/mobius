@@ -13,8 +13,8 @@ export default flare({
   404: () => notFound(),
 });
 
-const notFound = () => json({}, { status: 404 });
-
 const create = (url: string) => {
   return json({ message: "created", url });
 };
+
+const notFound = () => json({}, { status: 404 });

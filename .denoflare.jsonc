@@ -3,7 +3,9 @@
   "scripts": {
     "mobius": {
       "path": "./worker.ts",
-      "localPort": 8080,
+      "bindings": {
+      },
+      "localPort": 8080
     }
-  },
+  }
 }
