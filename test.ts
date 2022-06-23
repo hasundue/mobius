@@ -1,5 +1,8 @@
-import { assert, assertEquals } from "testing/asserts.ts";
-import { readLines } from "io/mod.ts";
+import { readLines } from "https://deno.land/std@0.144.0/io/mod.ts";
+import {
+  assert,
+  assertEquals,
+} from "https://deno.land/std@0.144.0/testing/asserts.ts";
 
 Deno.test("hello world", async () => {
   const process = Deno.run({

@@ -2,6 +2,5 @@
   "tasks": {
     "test": "deno test --unstable --allow-all",
     "dev": "denoflare serve mobius"
-  },
-  "importMap": "import_map.json"
+  }
 }
