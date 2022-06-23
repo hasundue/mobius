@@ -1,4 +1,4 @@
-name: test
+name: ci
 on:
   push:
     branches: [ main, dev ]
@@ -6,7 +6,7 @@ on:
     branches: [ main, dev ]
 
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
@@ -30,3 +30,9 @@ jobs:
 
       - name: Test
         run: deno task test
+
+      - name: Deploy
+        run: >
+          denoflare push mobius
+          --account-id ${{ secrets.ACCOUNT_ID }}
+          --api_token ${{ secrets.API_TOKEN }}
