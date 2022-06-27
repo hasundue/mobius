@@ -33,6 +33,6 @@ jobs:
 
       - name: Deploy
         run: >
-          denoflare push mobius
+          denoflare push worker.ts --name mobius
           --account-id ${{ secrets.ACCOUNT_ID }}
           --api-token ${{ secrets.API_TOKEN }}

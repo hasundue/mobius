@@ -1,6 +1,11 @@
 {
+  "lint": {
+    "rules": {
+      "exclude": ["no-empty-pattern"]
+    }
+  },
   "tasks": {
     "test": "deno test --unstable --allow-all",
-    "dev": "denoflare serve mobius"
+    "dev": "denoflare serve worker.ts --do-namespace-binding MOBIUS_DO:local:MobiusDO"
   }
 }

@@ -18,13 +18,21 @@ Deno.test("test", async () => {
       const host = matched[0];
       assert(host);
 
-      const checkStatus = async (path: string, method: string, status: number) => {
+      const checkStatus = async (
+        path: string,
+        method: string,
+        status: number,
+      ) => {
         const response = await fetch(host + path, { method });
         await response.text();
         assertEquals(response.status, status);
       };
 
-      const checkMessage = async (path: string, method = "GET", text: string | undefined) => {
+      const checkMessage = async (
+        path: string,
+        method: string,
+        text: string | undefined,
+      ) => {
         const response = await fetch(host + path, { method });
         const json = await response.json();
         assertEquals(json.message, text);
